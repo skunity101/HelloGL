@@ -10,7 +10,7 @@ HelloGL::HelloGL(int argc, char* argv[])
 	//camera->center.x = 5.0f; camera->center.y = 5.0f; camera->center.z = 5.0f;
 	camera->up.x = 0.0f; camera->up.y = 1.0f; camera->up.z = 0.0f;
 	//camera->up.x = 5.0f; camera->up.y = 5.0f; camera->up.z = 5.0f;
-	//rotation = 0.0f;
+	rotation = 0.0f;
 	GLUTCallbacks::Init(this);
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE);
