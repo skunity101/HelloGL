@@ -3,26 +3,9 @@
 #include <gl/GL.h> //OpenGL
 #include <gl/GLU.h> //OpenGL Utilities
 #include "GL\freeglut.h" //freeglut library
+#include "Structures.h"
 #define REFRESHRATE 16 //Pace of the application
 
-struct Vector3
-{
-	float x;
-	float y;
-	float z;
-
-};
-struct Camera {
-	Vector3 eye;
-	Vector3 center;
-	Vector3 up;
-};
-struct Color {
-	GLfloat r, g, b;
-};
-struct Vertex {
-	GLfloat x, y, z;
-};
 
 
 
@@ -44,11 +27,8 @@ public:
 private:
 	float rotation;
 	Camera* camera;
-	static Vertex vertices[];
-	static Color colors[];
-	static Vertex indexedVertices[];
-	static Color indexedColors[];
-	static GLushort indices[];
+	//static Vertex vertices[];
+	//static Color colors[];
 };
 
 

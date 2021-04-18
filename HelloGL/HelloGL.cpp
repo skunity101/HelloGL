@@ -1,5 +1,6 @@
 #include "HelloGL.h"
 #include "GLUTCallbacks.h"
+#include "Structures.h"
 
 HelloGL::HelloGL(int argc, char* argv[])
 {
@@ -25,7 +26,7 @@ HelloGL::HelloGL(int argc, char* argv[])
 	glViewport(0, 0, 650, 650); //set the viewport to be the entire window
 	gluPerspective(45, 1, 0, 1000); //set the correct perspective
 	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
+	glCullFace(GL_BACK); 
 	glutMainLoop();
 }
 
@@ -42,8 +43,8 @@ void HelloGL::Display()
 	glRotatef(rotation, 0.0f, 0.0f, 4.0f);
 	//drawPolygon()
 	//DrawCubeArray();
-	DrawIdexedCube();
-	//DrawCube();
+	//DrawIdexedCube();
+	DrawCube();
 	glPopMatrix();
 	glFlush(); //flushes the scene drawn to the graphics card
 	glutSwapBuffers();
@@ -199,7 +200,7 @@ void HelloGL::DrawCube() {
 	}
 }
 
-void HelloGL::DrawCubeArray()
+/*void HelloGL::DrawCubeArray()
 {
 	glPushMatrix();
 	glBegin(GL_TRIANGLES);
@@ -212,22 +213,8 @@ void HelloGL::DrawCubeArray()
 	}
 	glEnd();
 	glPopMatrix();
-}
+}*/
 
-void HelloGL::DrawIdexedCube()
-{
-	glPushMatrix();
-
-	glBegin(GL_TRIANGLES);
-	for (int i = 0; i < 36; i++)
-	{
-		glVertex3f(indexedVertices[indices[i]].x, indexedVertices[indices[i]].y, indexedVertices[indices[i]].z);
-		glColor3f(indexedColors[indices[i]].r, indexedColors[indices[i]].g, indexedColors[indices[i]].b);
-
-	}
-	glEnd();
-
-}
 
 HelloGL::~HelloGL(void)
 {
@@ -251,58 +238,23 @@ void HelloGL::Keyboard(unsigned char key, int x, int y)
 	if (key == 'a')
 		rotation += -0.5f;
 }
-Vertex HelloGL::vertices[] = { 1, 1, 1,  -1, 1, 1,  -1,-1, 1,      // v0-v1-v2 (front)
-				-1,-1, 1,   1,-1, 1,   1, 1, 1,      // v2-v3-v0
-
-				1, 1, 1,   1,-1, 1,   1,-1,-1,      // v0-v3-v4 (right)
-				1,-1,-1,   1, 1,-1,   1, 1, 1,      // v4-v5-v0
-
-				1, 1, 1,   1, 1,-1,  -1, 1,-1,      // v0-v5-v6 (top)
-				-1, 1,-1,  -1, 1, 1,   1, 1, 1,      // v6-v1-v0
-
-				-1, 1, 1,  -1, 1,-1,  -1,-1,-1,      // v1-v6-v7 (left)
-				-1,-1,-1,  -1,-1, 1,  -1, 1, 1,      // v7-v2-v1
-
-				-1,-1,-1,   1,-1,-1,   1,-1, 1,      // v7-v4-v3 (bottom)
-				1,-1, 1,  -1,-1, 1,  -1,-1,-1,      // v3-v2-v7
-
-				1,-1,-1,  -1,-1,-1,  -1, 1,-1,      // v4-v7-v6 (back)
-				-1, 1,-1,   1, 1,-1,   1,-1,-1 };    // v6-v5-v4
-
-Color HelloGL::colors[] = { 1, 1, 1,   1, 1, 0,   1, 0, 0,      // v0-v1-v2 (front)
-				1, 0, 0,   1, 0, 1,   1, 1, 1,      // v2-v3-v0
-
-				1, 1, 1,   1, 0, 1,   0, 0, 1,      // v0-v3-v4 (right)
-				0, 0, 1,   0, 1, 1,   1, 1, 1,      // v4-v5-v0
-
-				1, 1, 1,   0, 1, 1,   0, 1, 0,      // v0-v5-v6 (top)
-				0, 1, 0,   1, 1, 0,   1, 1, 1,      // v6-v1-v0
-
-				1, 1, 0,   0, 1, 0,   0, 0, 0,      // v1-v6-v7 (left)
-				0, 0, 0,   1, 0, 0,   1, 1, 0,      // v7-v2-v1
-
-				0, 0, 0,   0, 0, 1,   1, 0, 1,      // v7-v4-v3 (bottom)
-				1, 0, 1,   1, 0, 0,   0, 0, 0,      // v3-v2-v7
-
-				0, 0, 1,   0, 0, 0,   0, 1, 0,      // v4-v7-v6 (back)
-				0, 1, 0,   0, 1, 1,   0, 0, 1 };    // v6-v5-v4
 
 
-Vertex HelloGL::indexedVertices[] = { 0.5, 0.5, 1,  -0.5, 0.5, 0.5,  // v0,v1,
+/*Vertex HelloGL::indexedVertices[] = { 0.5, 0.5, 1,  -0.5, 0.5, 0.5,  // v0,v1,
 				-0.5,-0.5, 0.5,   0.5,-0.5, 0.5,   // v2,v3
 				0.5,-0.5,-0.5,   0.5, 0.5,-0.5,    // v4,v5
 				-0.5, 0.5,-0.5,   -0.5,-0.5,-0.5 }; // v6,v7
 
-Color HelloGL::indexedColors[] = { 1, 1, 1,   1, 1, 0,   // v0,v1,
+//Color HelloGL::indexedColors[] = { 1, 1, 1,   1, 1, 0,   // v0,v1,
 				1, 0, 0,   1, 0, 1,   // v2,v3
 				0, 0, 1,   0, 1, 1,   // v4,v5
 				0, 1, 0,   0, 0, 0 }; //v6,v7
 
-GLushort HelloGL::indices[] = { 0, 0.5, 1,  1, 1.5, 0,      // front
+//GLushort HelloGL::indices[] = { 0, 0.5, 1,  1, 1.5, 0,      // front
 				0, 1.5, 2,  2, 2.5, 0,      // right
 				0, 2.5, 3,  3, 0.5, 0,      // top
 				0.5, 3, 3.5,  3.5, 1, 0.5,      // left
 				3.5, 2, 1.5,  1.5, 1, 3.5,      // bottom
-				2, 3.5, 3,  3.5, 2.5, 2 };    // back
+				2, 3.5, 3,  3.5, 2.5, 2 };    // back*/
 
 
