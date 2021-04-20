@@ -5,6 +5,7 @@
 HelloGL::HelloGL(int argc, char* argv[])
 {
 	camera = new Camera();
+	cube = new Cube();
 	//camera->eye.x = 5.0f; camera->eye.y = 5.0f; camera->eye.z = -5.0f;
 	camera->eye.x = 0.0f; camera->eye.y = 0.0f; camera->eye.z = 1.0f;
 	camera->center.x = 0.0f; camera->center.y = 0.0f; camera->center.z = 0.0f;
@@ -44,7 +45,8 @@ void HelloGL::Display()
 	//drawPolygon()
 	//DrawCubeArray();
 	//DrawIdexedCube();
-	DrawCube();
+	//DrawCube();
+	cube->DrawIdexedCube();
 	glPopMatrix();
 	glFlush(); //flushes the scene drawn to the graphics card
 	glutSwapBuffers();
@@ -104,7 +106,7 @@ void HelloGL::drawTriangle() {
 	}*/
 }
 
-void HelloGL::DrawCube() {
+/*void HelloGL::DrawCube() {
 	glBegin(GL_TRIANGLES); {
 		// face v0-v1-v2
 		glColor3f(1, 1, 1);
@@ -198,23 +200,7 @@ void HelloGL::DrawCube() {
 		
 		glEnd();
 	}
-}
-
-/*void HelloGL::DrawCubeArray()
-{
-	glPushMatrix();
-	glBegin(GL_TRIANGLES);
-	for (int i = 0; i < 36; i++)
-	{
-		//glColor3f(colors[i].r, colors[i].g, colors[i].b);
-		//glVertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
-		glColor3fv(&colors[i].r);
-		glVertex3fv(&vertices[i].x);
-	}
-	glEnd();
-	glPopMatrix();
 }*/
-
 
 HelloGL::~HelloGL(void)
 {
@@ -228,6 +214,7 @@ void HelloGL::Update()
 	glutPostRedisplay();
 	if (rotation >= 360.0f)
 		rotation = 0.0f;
+	cube->Update();
 	//Sleep(10);
 }
 

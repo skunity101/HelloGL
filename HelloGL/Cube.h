@@ -12,6 +12,8 @@ private:
 	static Color indexedColors[];
 	static GLushort indices[];
 	GLfloat _rotation;
+	static Vertex vertices[];
+	static Color colors[];
 
 
 public:
@@ -20,4 +22,5 @@ public:
 
 	void Update();
 	void DrawIdexedCube();
+	void DrawCubeArray();
 };

@@ -38,7 +38,21 @@ void Cube::DrawIdexedCube()
 	{
 		glVertex3f(indexedVertices[indices[i]].x, indexedVertices[indices[i]].y, indexedVertices[indices[i]].z);
 		glColor3f(indexedColors[indices[i]].r, indexedColors[indices[i]].g, indexedColors[indices[i]].b);
-		glRotatef(_rotation, 1.0f, 0.0f, 0.0f);
+		glRotatef(_rotation, 1.0f, 0.0f, 0.0f); 
 	}
 	glEnd();
+}
+void Cube::DrawCubeArray()
+{
+	glPushMatrix();
+	glBegin(GL_TRIANGLES);
+	for (int i = 0; i < 36; i++)
+	{
+		//glColor3f(colors[i].r, colors[i].g, colors[i].b);
+		//glVertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
+		glColor3fv(&colors[i].r);
+		glVertex3fv(&vertices[i].x);
+	}
+	glEnd();
+	glPopMatrix();
 }
