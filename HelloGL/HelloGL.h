@@ -4,10 +4,8 @@
 #include <gl/GLU.h> //OpenGL Utilities
 #include "GL\freeglut.h" //freeglut library
 #include "Structures.h"
+#include "Cube.h"
 #define REFRESHRATE 16 //Pace of the application
-
-
-
 
 class HelloGL
 {
@@ -21,14 +19,11 @@ public:
 	void drawTriangle();
 	void Update();
 	void Keyboard(unsigned char key, int x, int y);
-	void DrawCube();
-	void DrawCubeArray();
-	void DrawIdexedCube();
+	
 private:
 	float rotation;
 	Camera* camera;
-	//static Vertex vertices[];
-	//static Color colors[];
+	Cube* cube;
 };
 
 

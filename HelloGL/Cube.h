@@ -12,12 +12,16 @@ private:
 	static Color indexedColors[];
 	static GLushort indices[];
 	GLfloat _rotation;
-
+	Vector3 _position;
+	//static Vertex vertices[];
+	//static Color colors[];
 
 public:
-	Cube();
+	Cube(float x, float y, float z);
 	~Cube();
 
 	void Update();
 	void DrawIdexedCube();
+	void DrawCube();
+	void DrawCubeArray();
 };

@@ -1,10 +1,13 @@
 #include "HelloGL.h"
 #include "GLUTCallbacks.h"
 #include "Structures.h"
+#include "Cube.h"
+
 
 HelloGL::HelloGL(int argc, char* argv[])
 {
 	camera = new Camera();
+	cube = new Cube();
 	//camera->eye.x = 5.0f; camera->eye.y = 5.0f; camera->eye.z = -5.0f;
 	camera->eye.x = 0.0f; camera->eye.y = 0.0f; camera->eye.z = 1.0f;
 	camera->center.x = 0.0f; camera->center.y = 0.0f; camera->center.z = 0.0f;
@@ -26,13 +29,15 @@ HelloGL::HelloGL(int argc, char* argv[])
 	glViewport(0, 0, 650, 650); //set the viewport to be the entire window
 	gluPerspective(45, 1, 0, 1000); //set the correct perspective
 	glEnable(GL_CULL_FACE);
+	glEnable(GL_DEPTH_TEST);
 	glCullFace(GL_BACK); 
 	glutMainLoop();
 }
 
 void HelloGL::Display()
 {
-	glClear(GL_COLOR_BUFFER_BIT); //this clears the scene
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //this clears the scene
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_DEPTH);
 	glPushMatrix();
 	glTranslatef(0.0f, 0.0f, -5.0f);
 	glRotatef(rotation, 1.0f, 0.0f, 0.0f);
@@ -44,7 +49,7 @@ void HelloGL::Display()
 	//drawPolygon()
 	//DrawCubeArray();
 	//DrawIdexedCube();
-	DrawCube();
+	cube->DrawIdexedCube();
 	glPopMatrix();
 	glFlush(); //flushes the scene drawn to the graphics card
 	glutSwapBuffers();
@@ -104,117 +109,6 @@ void HelloGL::drawTriangle() {
 	}*/
 }
 
-void HelloGL::DrawCube() {
-	glBegin(GL_TRIANGLES); {
-		// face v0-v1-v2
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, 0.5, 0.5);
-		glColor3f(1, 1, 0);
-		glVertex3f(-0.5, 0.5, 0.5);
-		glColor3f(1, 0, 0);
-		glVertex3f(-0.5, -0.5, 0.5);
-		// face v2-v3-v0
-		glColor3f(1, 0, 0);
-		glVertex3f(-0.5, -0.5, 0.5);
-		glColor3f(1, 0, 1);
-		glVertex3f(0.5, -0.5, 0.5);
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, 0.5, 0.5);
-		
-		// face v0-v3-v4
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, 0.5, 0.5);
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, -0.5, 0.5);
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, -0.5, -0.5);
-		// face v4-v5-v0
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, -0.5, -0.5);
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, 0.5, -0.5);
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, 0.5, 0.5);
-		
-		// face v0-v5-v6
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, 0.5, 0.5);
-		glColor3f(0, 1, 1);
-		glVertex3f(0.5, 0.5, -0.5);
-		glColor3f(0, 1, 0);
-		glVertex3f(-0.5, 0.5, -0.5);
-		// face v6-v1-v0
-		glColor3f(0, 1, 0);
-		glVertex3f(-0.5, 0.5, -0.5);
-		glColor3f(1, 1, 0);
-		glVertex3f(-0.5, 0.5, 0.5);
-		glColor3f(1, 1, 1);
-		glVertex3f(0.5, 0.5, 0.5);
-		
-		// face  v1-v6-v7
-		glColor3f(1, 1, 0);
-		glVertex3f(-0.5, 0.5, 0.5);
-		glColor3f(0, 1, 0);
-		glVertex3f(-0.5, 0.5, -0.5);
-		glColor3f(0, 0, 0);
-		glVertex3f(-0.5, -0.5, -0.5);
-		// face v7-v2-v1
-		glColor3f(0, 0, 0);
-		glVertex3f(-0.5, -0.5, -0.5);
-		glColor3f(1, 0, 0);
-		glVertex3f(-0.5, -0.5, 0.5);
-		glColor3f(1, 1, 0);
-		glVertex3f(-0.5, 0.5, 0.5);
-		
-		// face v7-v4-v3
-		glColor3f(0, 0, 0);
-		glVertex3f(-0.5, -0.5, -0.5);
-		glColor3f(0, 0, 1);
-		glVertex3f(0.5, -0.5, -0.5);
-		glColor3f(1, 0, 1);
-		glVertex3f(0.5, -0.5, 0.5);
-		// face v3-v2-v7
-		glColor3f(1, 0, 1);
-		glVertex3f(0.5, -0.5, 0.5);
-		glColor3f(1, 0, 0);
-		glVertex3f(-0.5, -0.5, 0.5);
-		glColor3f(0, 0, 0);
-		glVertex3f(-0.5, -0.5, -0.5);
-		
-		// face v4-v7-v6
-		glColor3f(0, 0, 1);
-		glVertex3f(0.5, -0.5, -0.5);
-		glColor3f(0, 0, 0);
-		glVertex3f(-0.5, -0.5, -0.5);
-		glColor3f(0, 1, 0);
-		glVertex3f(-0.5, 0.5, -0.5);
-		// face v6-v5-v4
-		glColor3f(0, 1, 0);
-		glVertex3f(-0.5, 0.5, -0.5);
-		glColor3f(0, 1, 1);
-		glVertex3f(0.5, 0.5, -0.5);
-		glColor3f(0, 0, 1);
-		glVertex3f(0.5, -0.5, -0.5);
-		
-		glEnd();
-	}
-}
-
-/*void HelloGL::DrawCubeArray()
-{
-	glPushMatrix();
-	glBegin(GL_TRIANGLES);
-	for (int i = 0; i < 36; i++)
-	{
-		//glColor3f(colors[i].r, colors[i].g, colors[i].b);
-		//glVertex3f(vertices[i].x, vertices[i].y, vertices[i].z);
-		glColor3fv(&colors[i].r);
-		glVertex3fv(&vertices[i].x);
-	}
-	glEnd();
-	glPopMatrix();
-}*/
-
 
 HelloGL::~HelloGL(void)
 {
@@ -228,6 +122,7 @@ void HelloGL::Update()
 	glutPostRedisplay();
 	if (rotation >= 360.0f)
 		rotation = 0.0f;
+	cube->Update();
 	//Sleep(10);
 }
 
