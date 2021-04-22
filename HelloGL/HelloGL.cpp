@@ -49,9 +49,10 @@ void HelloGL::Display()
 	glTranslatef(0.0f, 0.0f, 1.0f);
 	glRotatef(rotation, 0.0f, 0.0f, 4.0f);
 	//drawPolygon()
-	//DrawCubeArray();
+	//DrawCubeArray();                
 	//DrawIdexedCube();
-	cube->DrawIdexedCube();
+	Cube::Load((char*)"cube.txt");
+	//cube->DrawIdexedCube();
 	glPopMatrix();
 	glFlush(); //flushes the scene drawn to the graphics card
 	glutSwapBuffers();
